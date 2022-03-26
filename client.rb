@@ -2,7 +2,7 @@
 
 require_relative 'pb/sample_services_pb'
 
-STUB = Example::Calc::Stub.new('localhost:50051', :this_channel_is_insecure)
+STUB = Sample::FileStorage::Stub.new('localhost:50051', :this_channel_is_insecure)
 
 def upload(file_path)
   file = File.open(file_path)
@@ -42,8 +42,9 @@ def download(file_name)
   end
 end
 
+# コマンドの引数から呼び出すメソッド名とファイルのパス or ファイル名を受け取る
 method = ARGV[0]
-file_name = ARGV[1]
+file_name_or_path = ARGV[1]
 
 raise ArgumentError if %w[upload download].exclude?(method) || file_name.nil?
 
