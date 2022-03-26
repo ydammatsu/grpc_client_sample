@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'base64'
-require_relative 'pb/sample_services_pb'
+require './pb/sample_services_pb'
 
 # gRPC サーバーにリクエストを送るためのスタブ
 STUB = Sample::FileStorage::Stub.new('localhost:50051', :this_channel_is_insecure)
