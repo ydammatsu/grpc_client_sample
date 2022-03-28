@@ -4,7 +4,7 @@ require 'base64'
 require './pb/sample_services_pb'
 
 # gRPC サーバーにリクエストを送るためのスタブ
-STUB = Sample::FileStorage::Stub.new('localhost:50051', :this_channel_is_insecure)
+FILE_STORAGE_STUB = Sample::FileStorage::Stub.new('localhost:50051', :this_channel_is_insecure)
 
 def upload(file_path)
   # パスを元にローカルからファイルを取得
@@ -20,7 +20,7 @@ def upload(file_path)
   request.file_blob = file_blob
 
   # スタブにリクエストを入れて、gRPC サーバーの rpc を呼び出す。
-  response = STUB.upload(request)
+  response = FILE_STORAGE_STUB.upload(request)
 
   if response.error == :NO_ERROR
     puts "アップロード完了 file_name=#{file_name}, created_at=#{Time.at(response.created_at.seconds).strftime("%Y/%m/%d %H:%M")}"
@@ -37,7 +37,7 @@ def download(file_name)
   request.file_name = file_name
 
   # Stub にリクエストを入れて、gRPC サーバーの rpc を呼び出す。
-  response = STUB.download(request)
+  response = FILE_STORAGE_STUB.download(request)
   file_blob = Base64.decode64(response.file_blob)
 
   if response.error == :NO_ERROR
