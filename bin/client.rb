@@ -22,7 +22,7 @@ def upload(file_path)
   response = STUB.upload(request)
 
   if response.error == :NO_ERROR
-    puts "アップロード完了 file_name=#{file_name}, created_at=#{response.created_at}"
+    puts "アップロード完了 file_name=#{file_name}, created_at=#{Time.at(response.created_at.seconds).strftime("%Y/%m/%d %H:%M")}"
   else
     puts "アップロード失敗 file_name=#{file_name}, error=#{response.error}"
   end
