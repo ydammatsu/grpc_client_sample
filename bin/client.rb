@@ -51,6 +51,6 @@ end
 method = ARGV[0]
 file_name_or_path = ARGV[1]
 
-raise ArgumentError unless %w[upload download].include?(method) || file_name.nil?
+raise ArgumentError unless %w[upload download].include?(method) || file_name_or_path.nil?
 
 send(method, file_name_or_path)
