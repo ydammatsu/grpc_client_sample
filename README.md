@@ -1,6 +1,16 @@
 # grpc_server_sample
 Ruby で書いた勉強用の gRPC Client
 
+## 起動コマンド
+```
+bundle exec ruby bin/client.rb {`upload` or `download`} { ファイルのパス or ファイル名 }
+
+# (例)
+# bundle exec ruby bin/client.rb upload /Users/dammatsu.yuta/Desktop/hoge.png
+```
+
+
+
 ## ディレクトリ構成
 ```
 .
