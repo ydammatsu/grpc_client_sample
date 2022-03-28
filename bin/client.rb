@@ -7,7 +7,8 @@ require './pb/sample_services_pb'
 STUB = Sample::FileStorage::Stub.new('localhost:50051', :this_channel_is_insecure)
 
 def upload(file_path)
-  file = File.open(file_path, encoding: Encoding::UTF_8)
+  # パスを元にローカルからファイルを取得
+  file = File.open(file_path)
   file_blob = Base64.encode64(file.read)
   file_name = File.basename(file.path)
 
