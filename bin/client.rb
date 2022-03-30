@@ -16,11 +16,19 @@ def upload(file_path)
   request = Sample::UploadRequest.new
 
   # リクエストに値を詰めていく
-  request.file_name = File.basename(file.path)
+  request.file_name = file_name
   request.file_blob = file_blob
 
   # スタブにリクエストを入れて、gRPC サーバーの rpc を呼び出す。
   response = FILE_STORAGE_STUB.upload(request)
+
+  # まとめて下記のような書き方もできる
+  # response = FILE_STORAGE_STUB.upload(
+  #   Sample::UploadRequest.new(
+  #     file_name: file_name,
+  #     file_blob: file_blob
+  #   )
+  # )
 
   if response.error == :NO_ERROR
     puts "アップロード完了 file_name=#{file_name}, created_at=#{Time.at(response.created_at.seconds).strftime("%Y/%m/%d %H:%M")}"
